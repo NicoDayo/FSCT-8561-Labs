@@ -13,12 +13,12 @@ except nmap.PortScannerError as error:
 print(f"{nMap.command_line()}")
 print(f"scan information: {nMap.scaninfo()}\n")
 
-nMap.all_hosts()
-if not nMap.all_hosts: #if any hosts are not reachable then throws an error
+all_hosts = nMap.all_hosts()
+if not all_hosts: #if any hosts are not reachable then throws an error
     print(f"ERROR: No host found: {target_host} unreachable or scan has failed")
     raise SystemExit(0)
 
-for host in nMap.all_hosts():
+for host in all_hosts:
 
     print("======================")
     print(f"hosts: {nMap[host].hostname()}")
