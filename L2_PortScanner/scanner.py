@@ -1,5 +1,6 @@
 import nmap
 import ipaddress
+import time
 
 nMap = nmap.PortScanner()
 target_host="127.0.0.1"
@@ -9,7 +10,8 @@ ports="20-65535"
 try:
     ipaddress.ip_address(target_host)
 except ValueError:
-    print(f"ERROR: IP address used is invalid: {target_host}")
+    print(f"ERROR: IP address used is invalid: {target_host}\n")
+    time.sleep(3)
     raise SystemExit(0)
 
 try: #running the scan once to see if any errors occur or nmap doesn't work
