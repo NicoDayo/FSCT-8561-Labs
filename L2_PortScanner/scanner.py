@@ -27,7 +27,7 @@ for host in all_hosts:
         print(f"Protocol: {ptcl}")
         print("======================")
         port_list = list(nMap[host][ptcl])
-        port_list.sort()
+        port_list.sort() # get ports for the protocol, list them and sort
 
         for port in port_list:
             content = nMap[host][ptcl][port]
