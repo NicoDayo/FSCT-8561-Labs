@@ -6,6 +6,7 @@ nMap = nmap.PortScanner()
 target_host="127.0.0.1"
 ports="20-2236"
 #invalid ip test 256.256.256.256
+#unroutable ip 10.0.0.0
 
 try:
     ipaddress.ip_address(target_host)
