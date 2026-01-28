@@ -10,7 +10,7 @@ except nmap.PortScannerError as error:
     raise SystemExit(0)
 
 #scan information and command
-print(f"command - {nMap.command_line()}")
+print(f"{nMap.command_line()}")
 print(f"scan information: {nMap.scaninfo()}\n")
 
 nMap.all_hosts()
@@ -23,9 +23,9 @@ for host in nMap.all_hosts():
     print("======================")
     print(f"hosts: {nMap[host].hostname()}")
     print(f"status: {nMap[host].state()}")
-    print(f"Protocol > {ptcl}")
-    print("======================")
     for ptcl in nMap[host].all_protocols():
+        print(f"Protocol: {ptcl}")
+        print("======================")
         port_list = list(nMap[host][ptcl])
         port_list.sort()
 
