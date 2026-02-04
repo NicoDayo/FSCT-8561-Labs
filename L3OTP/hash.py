@@ -1,0 +1,4 @@
+import hashlib
+hashed_pw = hashlib.sha256("solips404".encode("utf-8")).digest()
+print(hashed_pw)
+#b'S\xaa\xeac\x91.\xdc\xcbT\xa6\x9d\xd3\x1d\xc2c~\xc1H\xbe\x13\xf8\xad\x13ju\xd2U\xc5\xdc\xfdIG'
