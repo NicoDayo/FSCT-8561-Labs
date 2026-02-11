@@ -8,7 +8,6 @@ logged = {
     "dst_ip_count": {},  #{"10.0.0.1": 8}
     "port_count": {},    #{"80": 7, "53": 6}
 }
-
 # counter to increment the logged capture values
 def increment(d, key):
     d[key] = d.get(key, 0) + 1
