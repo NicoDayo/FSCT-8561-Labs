@@ -5,7 +5,7 @@ port = 12345
 pw_attempts = 5
 otp_attempts = 5
 server_socket = socket.socket()
-server_socket.bind(("127.0.0.1", port)) #127.0.0.1 being loopback or localhost
+server_socket.bind(("127.0.0.1", port)) #127.0.0.1 being loopback or localhost (used as testing for now on local machine)
 print(f"socket binded to localhost with port: {port}")
 server_socket.listen(2)
 print("Server Started.. Listening...")
@@ -42,7 +42,7 @@ while True:
             #login cases----
             if not state["Login_confirm"]:
                 if not user_message.startswith("LOGIN|"):
-                    conn.sendall(b"ERROR|Login for user required.\n)")
+                    conn.sendall(b"ERROR|Login for user required.\n")
                     continue
 
                 contents = user_message.split("|")
@@ -62,7 +62,7 @@ while True:
                     state["Login_confirm"] = True
                     state["Login_User"] = uname
                     state["pw_attempts"] = 0
-                    conn.send(b"OK|Login Successful - OTP AUTH required (6 Digit Code)\n")
+                    conn.send(b"Login Successful - OTP AUTH required\n")
                 else:
                     state["pw_attempts"] += 1
                     attempts_remain = pw_attempts - state["pw_attempts"]
@@ -71,6 +71,7 @@ while True:
                         break
                     conn.send(f"ERROR|Login Failed - Invalid password (attempts left: {attempts_remain})\n".encode())
                 continue
+            # password and otp attempts are rate limited as to prevent anyone from brute forcing their way into accessing the system
 
             # OTP Authentication
             if state["Login_confirm"] and not state["OTP_Confirm"]:
@@ -86,7 +87,7 @@ while True:
                 if timed_otp.verify(otp_code, valid_window=1):
                     state["OTP_Confirm"] = True
                     state["otp_attempts"] = 0
-                    conn.send(b"OK|OTP verification SUCCESS, welcome\n")
+                    conn.send(b"OTP verification SUCCESS, welcome\n")
                     break
                 else:
                     state["otp_attempts"] += 1
@@ -96,5 +97,4 @@ while True:
                         break
                     conn.send(f"ERROR|Invalid or Expired OTP (attempts left: {attempts_remain})\n".encode())
                 continue
-    conn.close()
     print(f"Client:{address} - Disconnected from Server\n")

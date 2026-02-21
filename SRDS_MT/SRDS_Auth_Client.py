@@ -13,7 +13,7 @@ while True:
         client.close()
         raise SystemExit(0)
     print(f"(Server) > {server_response}")
-    if server_response.startswith("OK|"):
+    if server_response.startswith("Login Successful"):
         break
     if "Disconnecting" in server_response or "Rate Limited" in server_response:
         client.close()
@@ -29,7 +29,7 @@ while True:
         client.close()
         raise SystemExit(0)
     print(f"(Server) > {otp_response}")
-    if otp_response.startswith("OK|"):
+    if otp_response.startswith("OTP verification SUCCESS"):
         break
     if "Disconnecting" in otp_response or "Rate Limited" in otp_response:
         client.close()
