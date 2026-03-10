@@ -1,0 +1,1 @@
+# Note: CSV contains the message that needs to be decoded when the script is looking for an input after running
